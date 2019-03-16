@@ -1,4 +1,0 @@
-﻿  main.cpp
-c:\users\micha\cs3113\project_template\windows\pong_hw2\nyucodebase\main.cpp(27): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\micha\cs3113\project_template\windows\pong_hw2\nyucodebase\main.cpp(28): warning C4305: 'initializing': truncation from 'double' to 'float'
-  NYUCodebase.vcxproj -> C:\Users\micha\CS3113\project_template\Windows\Pong_Hw2\Debug\NYUCodebase.exe
