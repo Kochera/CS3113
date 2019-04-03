@@ -1,6 +1,4 @@
 ﻿  main.cpp
-c:\users\micha\desktop\cs3113\hw2\nyucodebase\main.cpp(27): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\micha\desktop\cs3113\hw2\nyucodebase\main.cpp(28): warning C4305: 'initializing': truncation from 'double' to 'float'
-  ShaderProgram.cpp
-  Generating Code...
+c:\users\micha\desktop\cs3113\hw2\nyucodebase\main.cpp(29): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\micha\desktop\cs3113\hw2\nyucodebase\main.cpp(30): warning C4305: 'initializing': truncation from 'double' to 'float'
   NYUCodebase.vcxproj -> C:\Users\micha\Desktop\CS3113\Hw2\Debug\NYUCodebase.exe

@@ -1,0 +1,9 @@
+﻿  main.cpp
+c:\users\micha\desktop\cs3113\hw3\nyucodebase\main.cpp(127): warning C4018: '<': signed/unsigned mismatch
+c:\users\micha\desktop\cs3113\hw3\nyucodebase\main.cpp(192): warning C4018: '<': signed/unsigned mismatch
+c:\users\micha\desktop\cs3113\hw3\nyucodebase\main.cpp(209): warning C4018: '<': signed/unsigned mismatch
+c:\users\micha\desktop\cs3113\hw3\nyucodebase\main.cpp(213): warning C4018: '<': signed/unsigned mismatch
+c:\users\micha\desktop\cs3113\hw3\nyucodebase\main.cpp(214): warning C4018: '<': signed/unsigned mismatch
+c:\users\micha\desktop\cs3113\hw3\nyucodebase\main.cpp(244): warning C4018: '<': signed/unsigned mismatch
+c:\users\micha\desktop\cs3113\hw3\nyucodebase\main.cpp(340): warning C4018: '<': signed/unsigned mismatch
+  NYUCodebase.vcxproj -> C:\Users\micha\Desktop\CS3113\Hw3\Debug\NYUCodebase.exe

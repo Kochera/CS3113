@@ -21,6 +21,8 @@
 
 SDL_Window* displayWindow;
 
+
+
 GLuint LoadTexture(const char *filePath) {
 	int w, h, comp;
 	unsigned char* image = stbi_load(filePath, &w, &h, &comp, STBI_rgb_alpha);
