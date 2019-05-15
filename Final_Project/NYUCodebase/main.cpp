@@ -1481,7 +1481,15 @@ int main(int argc, char *argv[])
 			state3.p1.sprite.size = 0.2f;
 		}
 		
-		
+		if (state1.p1.position.y < state1.floors[0].position.y-0.8f) {
+			mode = STATE_GAME_OVER;
+		}
+		if (state2.p1.position.y < state2.floors[0].position.y - 0.8f) {
+			mode = STATE_GAME_OVER;
+		}
+		if (state2.p1.position.y < state2.floors[0].position.y - 0.8f) {
+			mode = STATE_GAME_OVER;
+		}
 
 		float angle = 90.0f;
 		modelMatrix = glm::rotate(modelMatrix, angle, glm::vec3(0.0f, 0.0f, 1.0f));
