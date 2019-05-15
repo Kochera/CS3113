@@ -74,7 +74,6 @@ void SheetSprite::Draw(ShaderProgram &program) {
 	float v = (float)(((int)index) / spriteCountX) / (float)spriteCountY;
 	float spriteWidth = 1.0 / (float)spriteCountX;
 	float spriteHeight = 1.0 / (float)spriteCountY;
-	//GLfloat spriteUVs[] = { u, v,                       u, v + spriteHeight,                       u + spriteWidth, v + spriteHeight,                       u + spriteWidth, v };
 	float texCoords[] = { u, v + spriteHeight,
 		u + spriteWidth, v,
 		u, v,
@@ -263,7 +262,7 @@ void UpdateGameLevel(float elapsed) {
 		if (state.p1.position.x > state.top.position.x+state.top.size.x/2.0f) {
 			penetration = fabs((state.p1.position.x - state.top.position.x) - state.p1.size.x / 2.0f - state.top.size.x / 2.0f);
 			state.p1.position.x += penetration;
-			state.p1.collidedBottom = true;
+			state.p1.collidedBottom= true;
 		}
 		else if (state.p1.position.x < state.top.position.x - state.top.size.x/2.0f) {
 			penetration = fabs((state.top.position.x - state.p1.position.x) - state.p1.size.x / 2.0f - state.top.size.x / 2.0f);
@@ -322,11 +321,13 @@ void UpdateGameLevel(float elapsed) {
 		}
 	}
 	if (e_x9 < 0 && e_y9 < 0) {
+		//collision with bottom of sprite
 		if (state.e1.position.x > state.hill.position.x + state.hill.size.x / 2.0f) {
 			penetration = fabs((state.e1.position.x - state.hill.position.x) - state.e1.size.x / 2.0f - state.hill.size.x / 2.0f);
 			state.e1.position.x += penetration;
 			state.e1.collidedBottom = true;
 		}
+		//collision with top of sprite
 		else if (state.e1.position.x < state.hill.position.x - state.hill.size.x / 2.0f) {
 			penetration = fabs((state.hill.position.x - state.e1.position.x) - state.e1.size.x / 2.0f - state.hill.size.x / 2.0f);
 			state.e1.position.x -= penetration;
