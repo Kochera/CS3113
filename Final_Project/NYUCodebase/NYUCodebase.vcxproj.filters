@@ -62,5 +62,8 @@
     <Media Include="funny-yay.wav">
       <Filter>Resource Files</Filter>
     </Media>
+    <Media Include="jump.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>

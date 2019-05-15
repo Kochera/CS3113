@@ -51,6 +51,7 @@ GLuint LoadTexture(const char *filePath) {
 
 
 Mix_Chunk *someSound;
+Mix_Chunk *jmp;
 GLuint characters;
 GLuint World;
 GLuint Letters;
@@ -291,13 +292,12 @@ void UpdateMainMenu(float elapsed) {
 void UpdateGameWin(float elapsed) {
 
 }
-
-
+glm::mat4 modelMatrix = glm::mat4(1.0f);
+int dir = 1;
 void ProcessGameLevelInput(float elapsed, GameState &state) {
 	const Uint8 *keys = SDL_GetKeyboardState(NULL);
 	if (keys[SDL_SCANCODE_RIGHT]) {
 		state.p1.acceleration.x = 1.0f;
-		
 	}
 	else if (keys[SDL_SCANCODE_LEFT]) {
 		state.p1.acceleration.x = -1.0f;
@@ -311,6 +311,11 @@ void ProcessGameLevelInput(float elapsed, GameState &state) {
 	if (keys[SDL_SCANCODE_SPACE] && state.p1.collidedBottom == true) {
 		state.p1.collidedBottom = false;
 		state.p1.velocity.y = 1.9f;
+		Mix_PlayChannel(-1, jmp, 0);
+	}
+	else if (keys[SDL_SCANCODE_SPACE] && state.p1.collidedBottom == false) {
+		state.p1.sprite = SheetSprite(characters, 6, 8, 4);
+		state.p1.sprite.size = 0.2f;
 	}
 }
 void UpdateGameLevel(float elapsed, GameState &state) {
@@ -1188,6 +1193,8 @@ int main(int argc, char *argv[])
 	float framesPerSecond = 60.0f;
 	int currentIndex = 0;
 
+	
+
 	characters = LoadTexture(RESOURCE_FOLDER"characters_3.png");
 	SheetSprite player = SheetSprite(characters, currentIndex, 8, 4);
 	player.size = 0.2f;
@@ -1348,6 +1355,9 @@ int main(int argc, char *argv[])
 
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
 	
+	jmp = Mix_LoadWAV("jump.wav");
+	Mix_VolumeChunk(jmp, 30);
+
 	someSound = Mix_LoadWAV("funny-yay.wav"); 
 	Mix_VolumeChunk(someSound, 30);
 	
@@ -1357,7 +1367,7 @@ int main(int argc, char *argv[])
 	Mix_PlayMusic(music, -1);
 	
 	//Letters
-	glm::mat4 modelMatrix = glm::mat4(1.0f);
+	
 
 
 
@@ -1438,19 +1448,49 @@ int main(int argc, char *argv[])
 				currentIndex = 0;
 			}
 		}
-		state1.p1.sprite = SheetSprite(characters,runAnimation[currentIndex], 8, 4);
-		state1.p1.sprite.size = 0.2f;
-
-		state2.p1.sprite = SheetSprite(characters, runAnimation[currentIndex], 8, 4);
-		state2.p1.sprite.size = 0.2f;
-
-		state3.p1.sprite = SheetSprite(characters, runAnimation[currentIndex], 8, 4);
-		state3.p1.sprite.size = 0.2f;
 
 		
-		if (mode == STATE_GAME_OVER) {
+
+		if (state1.p1.collidedBottom == true) {
+			state1.p1.sprite = SheetSprite(characters, runAnimation[currentIndex], 8, 4);
+			state1.p1.sprite.size = 0.2f;
+		}
+		
+		if (state2.p1.collidedBottom == true) {
+			state2.p1.sprite = SheetSprite(characters, runAnimation[currentIndex], 8, 4);
+			state2.p1.sprite.size = 0.2f;
+		}
+
+		if (state3.p1.collidedBottom == true) {
+			state3.p1.sprite = SheetSprite(characters, runAnimation[currentIndex], 8, 4);
+			state3.p1.sprite.size = 0.2f;
+		}
+
+
+		
+		if (state1.p1.collidedBottom == false) {
+			state1.p1.sprite = SheetSprite(characters, 4, 8, 4);
+			state1.p1.sprite.size = 0.2f;
+		}
+		if (state2.p1.collidedBottom == false) {
+			state2.p1.sprite = SheetSprite(characters, 4, 8, 4);
+			state2.p1.sprite.size = 0.2f;
+		}
+		if (state3.p1.collidedBottom == false) {
+			state3.p1.sprite = SheetSprite(characters, 4, 8, 4);
+			state3.p1.sprite.size = 0.2f;
+		}
+		
+		
+
+		float angle = 90.0f;
+		modelMatrix = glm::rotate(modelMatrix, angle, glm::vec3(0.0f, 0.0f, 1.0f));
+		program.SetModelMatrix(modelMatrix);
+
+		if (mode == STATE_GAME_OVER || mode == STATE_GAME_WIN) {
 			Mix_HaltMusic();
 		}
+		
 		Render(program);
 		Update(elapsed);
 		ProcessInput(elapsed);
