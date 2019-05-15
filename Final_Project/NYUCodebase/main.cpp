@@ -193,7 +193,7 @@ GameState state3;
 void RenderMainMenu(ShaderProgram &program) {
 	DrawText(program, Letters, "Platformer", 0.2f, 0.0f, -1.0f, 0.0f);
 	DrawText(program, Letters, "(Press y to start)", 0.1f, 0.0f, -0.85f, -0.3f);
-	DrawText(program, Letters, "(Reach the coin to win, press Q to quit.)", 0.08f, 0.0f, -1.6f, -0.5f);
+	DrawText(program, Letters, "(Reach the highest point, press Q to quit.)", 0.08f, 0.0f, -1.6f, -0.5f);
 }
 void RenderGameOver(ShaderProgram &program) {
 	DrawText(program, Letters, "Game Over", 0.2f, 0.0f, -0.8f, 0.0f);
