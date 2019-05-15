@@ -57,6 +57,11 @@ GLuint World;
 GLuint Letters;
 float friction_x=0.5f;
 float friction_y=0.5f;
+
+float slidex = 0.0f;
+
+
+
 class SheetSprite {
 public:
 	SheetSprite() {}
@@ -192,9 +197,11 @@ GameState state1;
 GameState state2;
 GameState state3;
 void RenderMainMenu(ShaderProgram &program) {
-	DrawText(program, Letters, "Platformer", 0.2f, 0.0f, -1.0f, 0.0f);
-	DrawText(program, Letters, "(Press y to start)", 0.1f, 0.0f, -0.85f, -0.3f);
-	DrawText(program, Letters, "(Reach the highest point, press Q to quit.)", 0.08f, 0.0f, -1.6f, -0.5f);
+
+	DrawText(program, Letters, "Platformer", 0.2f, 0.0f, -0.85f, 0.0f);
+	DrawText(program, Letters, "(Press y to start)", 0.1f, 0.0f, -0.7f, -0.3f);
+	DrawText(program, Letters, "(Reach the highest point, press Q to quit.)", 0.08f, 0.0f, -1.62f, -0.5f);
+	
 }
 void RenderGameOver(ShaderProgram &program) {
 	DrawText(program, Letters, "Game Over", 0.2f, 0.0f, -0.8f, 0.0f);
@@ -207,6 +214,8 @@ void RenderGameWin(ShaderProgram &program) {
 SheetSprite player;
 glm::mat4 viewMatrix;
 void RenderGameLevel(ShaderProgram &program) {
+
+
 	//player
 	
 	state1.p1.Draw(program);
@@ -319,6 +328,8 @@ void ProcessGameLevelInput(float elapsed, GameState &state) {
 	}
 }
 void UpdateGameLevel(float elapsed, GameState &state) {
+
+
 	state.p1.acceleration.x = 0.0f;
 	ProcessGameLevelInput(elapsed, state);
 	float penetration = 0.0f;
@@ -1092,6 +1103,9 @@ void UpdateGameOver(float elapsed) {
 void ProcessMainMenuInput() {
 	const Uint8 *keys = SDL_GetKeyboardState(NULL);
 	if (keys[SDL_SCANCODE_Y]) {
+
+	
+
 		mode = STATE_GAME_LEVEL;
 	}
 }
@@ -1105,7 +1119,7 @@ void ProcessGameWinInput() {
 }
 
 
-void Render(ShaderProgram &program) {
+void Render(ShaderProgram &program, float elapsed) {
 	switch (mode) {
 	case STATE_MAIN_MENU:
 		RenderMainMenu(program);
@@ -1190,7 +1204,7 @@ int main(int argc, char *argv[])
 	const int runAnimation[] = { 0,1,2,3 };
 	const int numFrames = 4;
 	float animationElapsed = 0.0f;
-	float framesPerSecond = 60.0f;
+	float framesPerSecond = 240.0f;
 	int currentIndex = 0;
 
 	
@@ -1467,16 +1481,16 @@ int main(int argc, char *argv[])
 		}
 
 
-		
-		if (state1.p1.collidedBottom == false) {
+		const Uint8 *keys = SDL_GetKeyboardState(NULL);
+		if (state1.p1.collidedBottom == false && (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_LEFT])) {
 			state1.p1.sprite = SheetSprite(characters, 4, 8, 4);
 			state1.p1.sprite.size = 0.2f;
 		}
-		if (state2.p1.collidedBottom == false) {
+		if (state2.p1.collidedBottom == false && (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_LEFT])) {
 			state2.p1.sprite = SheetSprite(characters, 4, 8, 4);
 			state2.p1.sprite.size = 0.2f;
 		}
-		if (state3.p1.collidedBottom == false) {
+		if (state3.p1.collidedBottom == false && (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_LEFT])) {
 			state3.p1.sprite = SheetSprite(characters, 4, 8, 4);
 			state3.p1.sprite.size = 0.2f;
 		}
@@ -1499,7 +1513,7 @@ int main(int argc, char *argv[])
 			Mix_HaltMusic();
 		}
 		
-		Render(program);
+		Render(program, elapsed);
 		Update(elapsed);
 		ProcessInput(elapsed);
 
